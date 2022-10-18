@@ -1,7 +1,7 @@
 package com.soprasteria.springjpacountries.entities;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +23,7 @@ public class Country {
 	@Column(nullable = false)
 	private BigDecimal area;
 	
-	private Date national_day;
+	private LocalDate national_day;
 	
 	private String country_code2;
 	
