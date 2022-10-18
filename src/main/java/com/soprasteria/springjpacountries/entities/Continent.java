@@ -21,7 +21,7 @@ public class Continent {
 	@Column(nullable = false)
 	private String name;
 	
-	@OneToMany(mappedBy = "regions")
+	@OneToMany(mappedBy = "continent")
 	private List<Region> regions;
 
 	public Integer getContinent_id() {

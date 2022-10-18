@@ -23,7 +23,7 @@ public class Region {
 	@Column(nullable = false)
 	private String name;
 	
-	@OneToMany(mappedBy = "countries")
+	@OneToMany(mappedBy = "region")
 	private List<Country> countries;
 	
 	@ManyToOne
