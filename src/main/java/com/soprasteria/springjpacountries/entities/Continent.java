@@ -24,4 +24,28 @@ public class Continent {
 	@OneToMany(mappedBy = "regions")
 	private List<Region> regions;
 
+	public Integer getContinent_id() {
+		return continent_id;
+	}
+
+	public void setContinent_id(Integer continent_id) {
+		this.continent_id = continent_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Region> getRegions() {
+		return regions;
+	}
+
+	public void setRegions(List<Region> regions) {
+		this.regions = regions;
+	}
+
 }

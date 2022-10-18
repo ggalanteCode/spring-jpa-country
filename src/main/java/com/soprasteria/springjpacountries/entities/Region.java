@@ -30,4 +30,36 @@ public class Region {
 	@JoinColumn(nullable = false, name = "continent_id")
 	private Continent continent;
 
+	public Integer getRegion_id() {
+		return region_id;
+	}
+
+	public void setRegion_id(Integer region_id) {
+		this.region_id = region_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Country> getCountries() {
+		return countries;
+	}
+
+	public void setCountries(List<Country> countries) {
+		this.countries = countries;
+	}
+
+	public Continent getContinent() {
+		return continent;
+	}
+
+	public void setContinent(Continent continent) {
+		this.continent = continent;
+	}
+
 }
