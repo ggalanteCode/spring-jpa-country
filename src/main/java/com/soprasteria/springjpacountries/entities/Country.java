@@ -25,8 +25,10 @@ public class Country {
 	
 	private LocalDate national_day;
 	
+	@Column(nullable = false)
 	private String country_code2;
 	
+	@Column(nullable = false)
 	private String country_code3;
 
 }
