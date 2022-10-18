@@ -35,7 +35,7 @@ public class Country {
 	private String country_code3;
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
-	private Region region_id;
+	@JoinColumn(nullable = false, name = "region_id")
+	private Region region;
 
 }
