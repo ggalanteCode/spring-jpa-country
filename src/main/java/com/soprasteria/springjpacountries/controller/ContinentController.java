@@ -1,10 +1,37 @@
 package com.soprasteria.springjpacountries.controller;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.soprasteria.springjpacountries.entities.Continent;
+import com.soprasteria.springjpacountries.repo.ContinentRepository;
 
 @RestController
 @RequestMapping("/continent")
 public class ContinentController {
+	
+	@Autowired
+	private ContinentRepository continentRepository;
+	
+	@GetMapping("/allcontinents")
+	public List<Continent> continents() {
+		return (List<Continent>) continentRepository.findAll();
+	}
+	
+	@GetMapping("/{continentId}")
+	public Continent regionById(@PathVariable(value = "continentId") Integer continentId) {
+		Optional<Continent> region = continentRepository.findById(continentId);
+		if(region.isPresent()) {
+			return region.get();
+		} else {
+			return new Continent();
+		}
+	}
 
 }
