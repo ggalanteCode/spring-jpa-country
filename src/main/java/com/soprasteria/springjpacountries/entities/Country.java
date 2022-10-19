@@ -1,7 +1,6 @@
 package com.soprasteria.springjpacountries.entities;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "countries")
@@ -25,7 +26,8 @@ public class Country {
 	@Column(nullable = false)
 	private BigDecimal area;
 	
-	private LocalDate national_day;
+	//@Temporal(TemporalType.DATE)
+	//private LocalDate national_day;
 	
 	@Column(nullable = false)
 	private String country_code2;
@@ -35,6 +37,7 @@ public class Country {
 	
 	@ManyToOne
 	@JoinColumn(nullable = false, name = "region_id")
+	@JsonBackReference
 	private Region region;
 
 	public Integer getCountry_id() {
@@ -61,13 +64,13 @@ public class Country {
 		this.area = area;
 	}
 
-	public LocalDate getNational_day() {
+	/*public LocalDate getNational_day() {
 		return national_day;
 	}
 
 	public void setNational_day(LocalDate national_day) {
 		this.national_day = national_day;
-	}
+	}*/
 
 	public String getCountry_code2() {
 		return country_code2;
