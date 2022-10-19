@@ -25,7 +25,7 @@ public class ContinentController {
 	}
 	
 	@GetMapping("/{continentId}")
-	public Continent regionById(@PathVariable(value = "continentId") Integer continentId) {
+	public Continent continentById(@PathVariable(value = "continentId") Integer continentId) {
 		Optional<Continent> region = continentRepository.findById(continentId);
 		if(region.isPresent()) {
 			return region.get();

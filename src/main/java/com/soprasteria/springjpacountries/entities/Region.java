@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "regions")
 public class Region {
@@ -28,6 +30,7 @@ public class Region {
 	
 	@ManyToOne
 	@JoinColumn(nullable = false, name = "continent_id")
+	@JsonBackReference
 	private Continent continent;
 
 	public Integer getRegion_id() {

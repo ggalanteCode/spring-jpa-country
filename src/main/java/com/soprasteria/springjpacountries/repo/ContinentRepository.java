@@ -7,5 +7,5 @@ import com.soprasteria.springjpacountries.entities.Continent;
 
 @Repository
 public interface ContinentRepository extends CrudRepository<Continent, Integer> {
-
+	
 }
