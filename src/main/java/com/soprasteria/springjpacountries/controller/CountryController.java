@@ -1,5 +1,6 @@
 package com.soprasteria.springjpacountries.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.soprasteria.springjpacountries.entities.Country;
+import com.soprasteria.springjpacountries.entities.Region;
 import com.soprasteria.springjpacountries.repo.CountryRepository;
+import com.soprasteria.springjpacountries.repo.RegionRepository;
 
 @RestController
 @RequestMapping("/country")
@@ -19,6 +22,9 @@ public class CountryController {
 	
 	@Autowired
 	private CountryRepository countryRepository;
+	
+	@Autowired
+	private RegionRepository regionRepository;
 	
 	@GetMapping("/allcountries")
 	public List<Country> countries() {
@@ -35,9 +41,15 @@ public class CountryController {
 		}
 	}
 	
-	@GetMapping("/countriesByRegion")
-	public List<Country> countriesByRegion(@RequestParam(name = "regionId", required = true)Integer regionId) {
-		return (List<Country>) countryRepository.findAllByRegion(regionId);
+	@GetMapping("/countriesByRegion/{regionId}")
+	public List<Country> countriesByRegion(@PathVariable(value = "regionId", required = true)Integer regionId) {
+		Optional<Region> region = regionRepository.findById(regionId);
+		if(region.isPresent()) {
+			return (List<Country>) countryRepository.findAllByRegion(region.get());
+		} else {
+			return new ArrayList<>();
+		}
+		
 	}
 
 }
