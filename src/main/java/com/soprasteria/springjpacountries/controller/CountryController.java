@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -77,6 +78,12 @@ public class CountryController {
 		} else {
 			return new ResponseEntity<Country>((Country)null,HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	@DeleteMapping("/deletecountry/{countryID}")
+	public ResponseEntity<Country> deleteACountry(@PathVariable(value = "countryID") Integer countryID) {
+		countryRepository.deleteById(countryID);
+		return new ResponseEntity<Country>(HttpStatus.OK);
 	}
 
 }
