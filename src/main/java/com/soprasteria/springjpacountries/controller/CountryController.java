@@ -33,27 +33,27 @@ public class CountryController {
 	private RegionRepository regionRepository;
 	
 	@GetMapping("/allcountries")
-	public List<Country> countries() {
-		return (List<Country>) countryRepository.findAll();
+	public ResponseEntity<List<Country>> countries() {
+		return new ResponseEntity<List<Country>>((List<Country>)countryRepository.findAll(),HttpStatus.OK);
 	}
 	
 	@GetMapping("/{countryId}")
-	public Country countryById(@PathVariable(value = "countryId") Integer countryId) {
+	public ResponseEntity<Country> countryById(@PathVariable(value = "countryId") Integer countryId) {
 		Optional<Country> country = countryRepository.findById(countryId);
 		if(country.isPresent()) {
-			return country.get();
+			return new ResponseEntity<Country>(country.get(),HttpStatus.OK);
 		} else {
-			return new Country();
+			return new ResponseEntity<Country>((Country)null, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/countriesByRegion/{regionId}")
-	public List<Country> countriesByRegion(@PathVariable(value = "regionId", required = true)Integer regionId) {
+	public ResponseEntity<List<Country>> countriesByRegion(@PathVariable(value = "regionId", required = true)Integer regionId) {
 		Optional<Region> region = regionRepository.findById(regionId);
 		if(region.isPresent()) {
-			return (List<Country>) countryRepository.findAllByRegion(region.get());
+			return new ResponseEntity<List<Country>>((List<Country>)countryRepository.findAllByRegion(region.get()),HttpStatus.OK);
 		} else {
-			return new ArrayList<>();
+			return new ResponseEntity<List<Country>>((List<Country>)null, HttpStatus.NOT_FOUND);
 		}
 		
 	}
