@@ -58,8 +58,16 @@ public class CountryController {
 		
 	}
 	
-	@PostMapping("/insertcountry")
-	public ResponseEntity<Country> insertNewCountry(@RequestBody Country country) {
+	//SE IL COUNTRY NON ESISTE, NON SI PUO' FARE NULLA
+	@PostMapping("/insertcountry/{regionID}")
+	public ResponseEntity<Country> insertNewCountry(@RequestBody Country country,
+													@PathVariable(value = "regionID") Integer regionID) {
+		Optional<Region> findById = regionRepository.findById(regionID);
+		
+		if (findById.isPresent()) {
+			country.setRegion(findById.get());
+		}
+		
 		return new ResponseEntity<Country>(countryRepository.save(country), HttpStatus.OK);
 	}
 	
@@ -68,13 +76,8 @@ public class CountryController {
 												  @RequestBody Country country) {
 		Optional<Country> optional = countryRepository.findById(countryID);
 		if(optional.isPresent()) {
-			Country updatedCountry = optional.get();
-			updatedCountry.setArea(country.getArea());
-			updatedCountry.setCountry_code2(country.getCountry_code2());
-			updatedCountry.setCountry_code3(country.getCountry_code3());
-			updatedCountry.setName(country.getName());
-			updatedCountry.setRegion(country.getRegion());
-			return new ResponseEntity<Country>(countryRepository.save(updatedCountry),HttpStatus.OK);
+			country.setCountry_id(countryID);
+			return new ResponseEntity<Country>(countryRepository.save(country),HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Country>((Country)null,HttpStatus.NOT_FOUND);
 		}
